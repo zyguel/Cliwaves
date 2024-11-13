@@ -1,8 +1,20 @@
-import React from 'react';
+import { Button } from "@/components/ui/button";
+import { RefreshCw } from "lucide-react";
 
 const WeatherDashboard = () => {
   return (
-    <div>WeatherDashboard</div>
+    <div>
+     {/* Favorite */}
+     <div>
+        <h1>My Location</h1>
+        <Button>
+          <RefreshCw />
+        </Button>
+     </div>
+     {/* Current and Hourly weather */ }
+    </div>
+   
+   
   )
 }
 
