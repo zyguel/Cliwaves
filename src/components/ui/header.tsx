@@ -17,6 +17,7 @@ const Header = () => {
                 className="h-16"
             />
             </Link>
+            <p className="text-3xl font-bold">Cliwaves</p>
             <div>
                 {/* search */}
                 {/* theme toggle */}

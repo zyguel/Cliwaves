@@ -5,7 +5,7 @@ import { ThemeProvider } from "./context/theme-provider.tsx";
 import WeatherDashboard from './pages/weather_dashboard.tsx';
 import CityPage from './pages/city_page.tsx';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+// import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 const queryClient = new QueryClient({
   defaultOptions:{
     queries: {
@@ -34,7 +34,7 @@ function App() {
           </Layout>
         </ThemeProvider>
       </BrowserRouter>
-      <ReactQueryDevtools initialIsOpen={false} />
+      {/*<ReactQueryDevtools initialIsOpen={false}/>*/}
     </QueryClientProvider>
   );
 }

@@ -15,7 +15,7 @@ export interface WeatherData {
     weather: WeatherCondition[];
     main: {
         temp:number;
-        feels_lke: number;
+        feels_like: number;
         temp_min: number;
         temp_max: number;
         pressure: number;
