@@ -1,11 +1,14 @@
+import CurrentWeather from "@/components/current-weather";
 import WeatherSkeleton from "@/components/loading-skeleton";
+import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { useGeolocation } from "@/hooks/use-geolocation";
-import { RefreshCw } from "lucide-react";
+import { useForcastQuery, useReverseGeocodeQuery, useWeatherQuery } from "@/hooks/use-weather";
+import { AlertTriangle, MapPin, RefreshCw } from "lucide-react";
 import { useEffect, useState } from "react";
-
+ 
 const WeatherDashboard = () => {
-  const [isRefreshing, setIsRefreshing] = useState(false);
+ // const [isRefreshing, setIsRefreshing] = useState(false);
   const { 
     coordinates, 
     error: locationError, 
@@ -13,19 +16,80 @@ const WeatherDashboard = () => {
     isLoading: locationLoading,
   } = useGeolocation();
 
+  const locationQuery = useReverseGeocodeQuery(coordinates);
+  const forecastQuery = useForcastQuery(coordinates);
+  const weatherQuery = useWeatherQuery(coordinates);
+
   const handleRefresh = () => {
-    setIsRefreshing(true);
+  //  setIsRefreshing(true);
     getLocation();
     if (coordinates) {
       // reload weather data
+      weatherQuery.refetch();
+      forecastQuery.refetch();
+      locationQuery.refetch();
     }
     setTimeout(() => {
-      setIsRefreshing(false);
+    //  setIsRefreshing(false);
     }, 1000);
   };
   if(locationLoading){
     return <WeatherSkeleton />
   } 
+
+  if (locationError){
+    return (
+      <Alert variant="destructive">
+        <AlertTriangle className="h-4 w-4" />
+        <AlertTitle>Location Error</AlertTitle>
+        <AlertDescription>
+          <p>{locationError}</p>
+          <Button onClick={getLocation} variant={"outline"} className="w-fit">
+            <MapPin className="mr-2 h-4 w-4"/>
+            Enable Location
+          </Button>
+        </AlertDescription>
+      </Alert>
+  );
+  }
+
+  if (!coordinates){
+    return (
+      <Alert variant="destructive">
+        <AlertTriangle className="h-4 w-4" />
+        <AlertTitle>Location Required</AlertTitle>
+        <AlertDescription className="flex fex-col gap-4">
+          <p>Please enable location access to see your local weather.</p>
+          <Button onClick={getLocation} variant={"outline"} className="w-fit">
+            <MapPin className="mr-2 h-4 w-4"/>
+            Enable Location
+          </Button>
+        </AlertDescription>
+      </Alert>
+  );
+  }
+  const locationName = locationQuery.data?.[0];
+
+  if (weatherQuery.error || forecastQuery.error){
+    return(
+      <Alert variant="destructive">
+      <AlertTriangle className="h-4 w-4" />
+      <AlertTitle> Error</AlertTitle>
+      <AlertDescription>
+        <p>Failed to fetch weather data. Please try again.</p>
+        <Button onClick={handleRefresh} variant={"outline"} className="w-fit">
+          <RefreshCw className="mr-2 h-4 w-4"/>
+          Retry
+        </Button>
+      </AlertDescription>
+    </Alert>
+    );
+  }
+
+  if(!weatherQuery.data || !forecastQuery.data){
+   return <WeatherSkeleton />;
+  }
+
   return (
     <div className="space-y-4">
      {/* Favorite */}
@@ -34,13 +98,27 @@ const WeatherDashboard = () => {
         <Button variant={'outline'}
           size={"icon"}
            onClick={handleRefresh}
-           className={`transition-transform delay-700 ${isRefreshing ? 'rotate-180' : ''}`}
-          // disabled={}
+           className={`transition-transform delay-700`}
+           disabled={weatherQuery.isFetching || forecastQuery.isFetching}
         >
-          <RefreshCw className="h-4 w-4"/>
+          <RefreshCw className={`h-4 w-4 ${weatherQuery.isFetching?"animate-spin": ""}`}/>
         </Button>
      </div>
      {/* Current and Hourly weather */ }
+     <div className="grid gap-6">
+      <div>
+          <CurrentWeather data={weatherQuery.data} locationName={locationName} />
+        {/* Current weather */}
+        {/* Hourly temps */}
+
+      </div>
+
+      <div>
+
+
+      </div>
+ 
+     </div>
     </div>
    
    
