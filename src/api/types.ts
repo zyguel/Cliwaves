@@ -48,7 +48,7 @@ export interface ForecastData {
         country: string;
         sunrise: number;
         sunset: number;
-    }
+    };
 }
 export interface GeocodingResponse {
     name: string;
