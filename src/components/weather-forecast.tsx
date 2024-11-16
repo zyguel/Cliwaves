@@ -83,11 +83,12 @@ export function WeatherForecast({ data }: WeatherForecastProps) {
 
               <div className="flex justify-end gap-2 sm:gap-4">
                 <span className="flex items-center gap-1">
-                  <Droplets className="ml-1 h-3 w-3 sm:ml-0 sm:h-4 sm:w-4 text-blue-500" />
-                  <span className="text-sm">{day.humidity}%</span>
+                  <Droplets className="ml-1 h-3 w-3 sm:ml-0 sm:h-4 sm:w-4 text-blue-500 invisible sm:visible" />
+                  <span className="text-sm invisible sm:visible">{day.humidity}%</span>
                 </span>
+           
                 <span className="flex items-center gap-1">
-                  <Wind className=" ml-1 h-3 w-3 sm:ml-0 sm:h-4 sm:w-4 text-blue-500" />
+                  <Wind className="ml-1 h-3 w-3 sm:ml-0 sm:h-4 sm:w-4 text-blue-500" />
                   <span className="text-sm">{day.wind}m/s</span>
                 </span>
               </div>

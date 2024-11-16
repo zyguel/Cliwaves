@@ -14,7 +14,7 @@ const Header = () => {
             <img
                 src={theme === 'dark' ? "/Cliwaves-dark.svg" : "/Cliwaves-dark.svg"}
                 alt="Cliwave Logo"
-                className="h-16"
+                className="object-contain sm:h-16 max-w-16"
             />
             </Link>
             <p className="text-3xl font-bold">Cliwaves</p>
