@@ -6,7 +6,7 @@ import { Button } from "@/components/ui/button";
 import { WeatherDetails } from "@/components/weather-details";
 import { WeatherForecast } from "@/components/weather-forecast";
 import { useGeolocation } from "@/hooks/use-geolocation";
-import { useForcastQuery, useReverseGeocodeQuery, useWeatherQuery } from "@/hooks/use-weather";
+import { useForecastQuery, useReverseGeocodeQuery, useWeatherQuery } from "@/hooks/use-weather";
 import { AlertTriangle, MapPin, RefreshCw } from "lucide-react";
 //import { useEffect, useState } from "react";
  
@@ -20,7 +20,7 @@ const WeatherDashboard = () => {
   } = useGeolocation();
 
   const locationQuery = useReverseGeocodeQuery(coordinates);
-  const forecastQuery = useForcastQuery(coordinates);
+  const forecastQuery = useForecastQuery(coordinates);
   const weatherQuery = useWeatherQuery(coordinates);
 
   const handleRefresh = () => {
