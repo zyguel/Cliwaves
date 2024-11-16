@@ -14,10 +14,10 @@ const Header = () => {
             <img
                 src={theme === 'dark' ? "/Cliwaves-dark.svg" : "/Cliwaves-dark.svg"}
                 alt="Cliwave Logo"
-                className="object-contain w-10 sm:h-16 max-w-16"
+                className="object-contain h-10 sm:h-16 max-w-16"
             />
             </Link>
-            <p className="text-3xl font-bold">Cliwaves</p>
+            <p className="text-base font-bold sm:text-3xl">Cliwaves</p>
             <div className="flex gap-4">
                 {/* search */}
                 <CitySearch />
