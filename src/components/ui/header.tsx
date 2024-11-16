@@ -12,7 +12,7 @@ const Header = () => {
         <div className="container mx-auto flex h-16 items-center justify-between px-4">
             <Link to={"/"}>
             <img
-                src={theme === 'dark' ? "/Cliwaves-dark.png" : "/Cliwaves-dark.png"}
+                src={theme === 'dark' ? "/Cliwaves-dark.svg" : "/Cliwaves-dark.svg"}
                 alt="Cliwave Logo"
                 className="h-16"
             />
