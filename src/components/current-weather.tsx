@@ -1,5 +1,5 @@
-import { GeocodingResponse, WeatherData } from '@/api/types'
-import React from 'react'
+import { GeocodingResponse, WeatherData } from '@/api/types';
+
 import { Card, CardContent } from './ui/card';
 import { ArrowDown, ArrowUp, Droplet, Wind } from 'lucide-react';
 
