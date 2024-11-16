@@ -4,6 +4,7 @@ import WeatherSkeleton from "@/components/loading-skeleton";
 import { Alert, AlertDescription, AlertTitle } from "@/components/ui/alert";
 import { Button } from "@/components/ui/button";
 import { WeatherDetails } from "@/components/weather-details";
+import { WeatherForecast } from "@/components/weather-forecast";
 import { useGeolocation } from "@/hooks/use-geolocation";
 import { useForcastQuery, useReverseGeocodeQuery, useWeatherQuery } from "@/hooks/use-weather";
 import { AlertTriangle, MapPin, RefreshCw } from "lucide-react";
@@ -113,13 +114,14 @@ const WeatherDashboard = () => {
           <HourlyTemperature 
             data={forecastQuery.data}
           />
+          
       </div>
 
       <div>
         { /* details */}
         <WeatherDetails data={weatherQuery.data} />
         { /* forecast */}
-
+        <WeatherForecast data={forecastQuery.data} />
       </div>
  
      </div>
